@@ -15,7 +15,7 @@ import streamlit as st
 # In[3]:
 
 
-get_ipython().system('pip install streamlit')
+#get_ipython().system('pip install streamlit')
 
 
 # In[5]:
