@@ -5,7 +5,10 @@ import dash_html_components as html
 import plotly.express as px
 import pandas as pd
 
-app = dash.Dash(Dash_Test)
+app = dash.Dash(__name__)
+
+# assume you have a "long-form" data frame
+# see https://plotly.com/python/px-arguments/ for more options
 df = pd.DataFrame({
     "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
     "Amount": [4, 1, 2, 2, 4, 5],
@@ -27,5 +30,5 @@ app.layout = html.Div(children=[
     )
 ])
 
-if Dash_Test == '__main__':
+if __name__ == '__main__':
     app.run_server(debug=True)
