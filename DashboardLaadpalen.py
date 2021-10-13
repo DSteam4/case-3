@@ -537,7 +537,7 @@ group_labels = ['']
 figLaad = ff.create_distplot(hist_date, group_labels, bin_size=0.25)
 
 figLaad.update_layout(xaxis_range=[-0.2,10], showlegend=False, 
-                     title = 'Relatief aantal laadsessies per laadtijd',
+                     title = '<b>Relatief aantal laadsessies per laadtijd</b>',
                      yaxis_title = 'Relatief aantal laadsessies',
                      xaxis_title = 'Laadtijd in uren (met bins van een kwartier)')
 
@@ -564,7 +564,7 @@ dflpdpos['StartTime'] = dflpdpos['StartTime'].apply(lambda x: x.time())
 sort = dflpdpos.sort_values('StartTime')
 
 # Scatterplot van tijd en laadtijd
-figTimeSca = px.scatter(sort, x = 'StartTime', y = 'ConnectedTime', opacity=0.2, title = 'Starttijd van de laadsessie tegenover de tijd verbonden aan laadpaal')
+figTimeSca = px.scatter(sort, x = 'StartTime', y = 'ConnectedTime', opacity=0.2, title = '<b>Starttijd van de laadsessie tegenover de tijd verbonden aan laadpaal</b>')
 figTimeSca.update_yaxes(title = 'Tijd verbonden aan laadpaal (in uren)', range = [-1, 24])
 figTimeSca.update_xaxes(title = 'Starttijd van de laadsessie (tijdstempel)')
 figTimeSca.show()
