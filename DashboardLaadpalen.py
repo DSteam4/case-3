@@ -242,7 +242,7 @@ df_openchargemap_geo = gpd.GeoDataFrame(df_openchargemap, crs = "EPSG:4326", geo
 sjoin = gpd.sjoin(df_openchargemap_geo, df_geo, how = 'right', op = 'within')
 sjoin.info()
 
-laadpalen_prov = sjoin['PROV_NAAM'].value_counts(normalize = True).sort_values(ascending = False)
+laadpalen_prov = pd.DataFrame(sjoin['PROV_NAAM'].value_counts().sort_values(ascending = False), columns = ['Provincie', 'Aantal laadpalen'])
 
 
 # Functie legenda definiëren
@@ -504,7 +504,7 @@ operationtype_leg = add_categorical_legend(m_dual, 'Werking laadstation', colors
 
 folium.LayerControl(position = 'topleft').add_to(m_dual)
 
-col1, col2 = st.columns([6,1])
+col1, col2 = st.columns([5,2])
 with col1:
     folium_static(m_dual, width = 1200, height = 800)
 with col2:
