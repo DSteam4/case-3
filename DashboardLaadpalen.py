@@ -417,8 +417,8 @@ groups_contypes = {}
 for i, j in zip(unique_contypes['ConTypesUnique'], unique_contypes['ConTypesUnique_beaut']):
     groups_contypes['g_%s' % i] = folium.plugins.FeatureGroupSubGroup(mcl, name = str(j))
 
-for key,val in dct_contypes.items():
-    exec(key + '=val')
+# for key,val in dct_contypes.items():
+#     exec(key + '=val')
 
 groups_contypes_list = list(groups_contypes.keys())
 
