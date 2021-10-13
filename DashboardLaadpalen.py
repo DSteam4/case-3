@@ -582,10 +582,11 @@ def regmodel(Y, X):
 
 regmodel(dflpdpos['TotalEnergy'],dflpdpos[['ConnectedTime','ChargeTime']])
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(2)
 
-ax = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'])
+ax[0] = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'])
+
+ax[1] = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'])
+ax[1].set(xlim=(0,80000),ylim=(0,24))
+
 st.pyplot(fig)
-
-g2 = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'])
-g2.set(xlim=(0,80000),ylim=(0,24))
