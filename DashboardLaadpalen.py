@@ -556,3 +556,15 @@ figLaad.add_annotation(x=CharMedian, y=0.295,
 
 figLaad.show()
 st.plotly_chart(figLaad)
+
+dflpdpos['StartTime'] = pd.to_datetime(dflpdpos['Started'], errors = 'coerce')
+dflpdpos['StartTime'] = dflpdpos['StartTime'].dropna()
+dflpdpos['StartTime'] = dflpdpos['StartTime'].apply(lambda x: x.time())
+
+sort = dflpdpos.sort_values('StartTime')
+
+# Scatterplot van tijd en laadtijd
+figTimeSca = px.scatter(sort, x = 'StartTime', y = 'ConnectedTime', opacity=0.2)
+figTimeSca.update_yaxes(range = [-1, 24])
+figTimeSca.show()
+st.plotly_chart(figTimeSca)
