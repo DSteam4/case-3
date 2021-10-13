@@ -507,10 +507,8 @@ operationtype_leg = add_categorical_legend(m_dual, 'Werking laadstation', colors
 
 folium.LayerControl(position = 'topleft').add_to(m_dual)
 
-col1, col2 = st.columns([6,1])
-with col1:
-    folium_static(m_dual, width = 1200, height = 800)
-with col2:
-    st.dataframe(laadpalen_prov.assign(hack='').set_index('hack'), height = 150)
+folium_static(m_dual, width = 1200, height = 800)
+st.subheader('Aantal laadpalen per provincie')
+st.dataframe(laadpalen_prov.assign(hack='').set_index('hack'), height = 700)
 
 st.header("Laadpaalgebruik")
