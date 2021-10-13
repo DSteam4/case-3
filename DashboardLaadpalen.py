@@ -588,13 +588,10 @@ fig.suptitle("Regressielijn energie uitgezet tegen 'tijd verbonden aan laadpaal'
 
 sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'], ax = ax[0],
            scatter_kws={"color": "black"}, line_kws={"color": "red"})
-ax[0].set_xlabel(title = 'Totaal verbruikte energie in Wh')
-ax[0].set_ylabel(title = 'Tijd verbonden aan laadpaal (in uren)')
+ax[0].set(xlabel = 'Totaal verbruikte energie (in Wh)', ylabel = 'Tijd verbonden aan laadpaal (in uren)')
 
 sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'], ax = ax[1],
            scatter_kws={"color": "black"}, line_kws={"color": "red"})
-ax[1].set_xlabel(title = 'Totaal verbruikte energie in Wh')
-ax[1].set_ylabel(title = 'Laadtijd (in uren)')
-ax[1].set(xlim=(0,80000),ylim=(0,24))
+ax[1].set(xlim=(0,80000), ylim=(0,24), xlabel = 'Totaal verbruikte energie (in Wh)', ylabel = 'Laadtijd (in uren)')
 
 st.pyplot(fig, height = 500)
