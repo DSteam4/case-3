@@ -34,7 +34,7 @@ df_groot = requests.get(df_groot_url).json()
 
 df_groot = pd.DataFrame.from_dict(df_groot)
 
-con_dict = (df_groot['Connections'])
+#con_dict = (df_groot['Connections'])
 
 dfnew['Connections_groot'] = df_groot['Connections']
 
