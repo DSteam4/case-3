@@ -586,9 +586,9 @@ fig, ax = plt.subplots(1, 2)
 
 fig.suptitle('**Dit moet nog een mooie titel worden**')
 
-ax[0] = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'])
+sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'], ax = ax[0])
 
-ax[1] = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'])
+sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'], ax = ax[1])
 ax[1].set(xlim=(0,80000),ylim=(0,24))
 
 st.pyplot(fig)
