@@ -555,7 +555,7 @@ figLaad.add_annotation(x=CharMedian, y=0.295,
             xanchor = 'right')
 
 figLaad.show()
-st.plotly_chart(figLaad)
+# st.plotly_chart(figLaad)
 
 dflpdpos['StartTime'] = pd.to_datetime(dflpdpos['Started'], errors = 'coerce')
 dflpdpos['StartTime'] = dflpdpos['StartTime'].dropna()
@@ -568,7 +568,13 @@ figTimeSca = px.scatter(sort, x = 'StartTime', y = 'ConnectedTime', opacity=0.2,
 figTimeSca.update_yaxes(title = 'Tijd verbonden aan laadpaal (in uren)', range = [-1, 24])
 figTimeSca.update_xaxes(title = 'Starttijd van de laadsessie (tijdstempel)')
 figTimeSca.show()
-st.plotly_chart(figTimeSca)
+# st.plotly_chart(figTimeSca)
+
+col1, col2 = st.columns(2)
+#col1.header("Time scatter")
+col1.plotly_chart(figLaad)
+#col2.header("Laadtijd")
+col2.plotly_chart(figTimeSca)
 
 st.header("Regressie")
 
