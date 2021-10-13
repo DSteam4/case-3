@@ -32,7 +32,35 @@ De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets
 •	...(duplicates)  
 •	...(missende waardes)  
 •	...(nieuwe variabelen)  
+
+**OpenChargeMap** (https://openchargemap.org/site/develop/api)  
+De data over laadstations in Nederland komt van OpenChargeMap. Deze data is via API binnengehaald en vervolgens **geïnspecteerd**.  
+
+•	In de dataset komen geen **duplicates** voor, er zijn dan ook geen waarnemingen uit de set verwijderd.  
+•	**Missende waardes** zijn ook niet uit de set verwijderd, maar opgevuld. Missende waardes met betrekking tot adres zijn opgevuld aan de hand van de coördinaten en Geolocator. Missende waardes met betrekking tot kenmerken van de laadstations zijn opgevuld met de tekst ‘onbekend’, zodat deze als zodanig in een popup-tekst worden weergegeven.  
+•	Bij het inspecteren van de data zijn **nieuwe variabelen** gegenereerd. Zo zijn bijvoorbeeld de stroomtypes (AC, DC, beide of onbekend) uit een geneste dictonary gehaald en in een nieuwe kolom gezet.  
+
+**Data laadpaalgebruik** (bijgeleverde csv, Hogeschool van Amsterdam)
+De data over het laadpaalgebruik is verstrekt als csv door de Hogeschool van Amsterdam. Deze data is dus als csv ingelezen en vervolgens **geïnspecteerd**.
+
+•	...(duplicates)  
+•	...(missende waardes)  
+•	...(nieuwe variabelen)  
+•	...(outliers)  
+
 ''')
+
+st.header("Regressie")
+
+st.header("Aantallen auto's per brandstofcategorie")
+
+st.header("Laadstations in Nederland")
+st.markdown('''Onderstaande interactieve kaart bestaat uit twee subkaarten. Beide kaarten tonen de laadstations verdeeld over Nederland. Als er wordt ingezoomd zijn alle laadstations individueel te bekijken. Wanneer er op de marker geklikt wordt, worden bepaalde eigenschappen van het laadstation getoond.  
+
+De legenda geeft – voor beide kaarten – weer welke kleur van een laadstation welk stroomtype vertegenwoordigd. Een lichtgrijze marker betekent dat het laadstation niet in werking is.  
+
+De eerste kaart (links) bevat een filter waarbij gefilterd kan worden op het type aansluiting.  
+De tweede kaart bevat een filter waarbij gefilterd kan worden op provincie.  ''')
 
 # df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
 # df_ocm = requests.get(df_ocm_url).json()
@@ -477,3 +505,5 @@ operationtype_leg = add_categorical_legend(m_dual, 'Werking laadstation', colors
 folium.LayerControl(position = 'topleft').add_to(m_dual)
 
 folium_static(m_dual, width = 1200, height = 800)
+
+st.header("Laadpaalgebruik")
