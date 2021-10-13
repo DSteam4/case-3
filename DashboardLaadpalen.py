@@ -242,7 +242,10 @@ df_openchargemap_geo = gpd.GeoDataFrame(df_openchargemap, crs = "EPSG:4326", geo
 sjoin = gpd.sjoin(df_openchargemap_geo, df_geo, how = 'right', op = 'within')
 sjoin.info()
 
-laadpalen_prov = pd.DataFrame(sjoin['PROV_NAAM'].value_counts().sort_values(ascending = False), columns = ['Provincie', 'Aantal laadpalen'])
+laadpalen_prov = pd.DataFrame(sjoin['PROV_NAAM'].value_counts().sort_values(ascending = False))
+laadpalen_prov.columns = ['Aantal laadstations']
+laadpalen_prov['Provincie'] = laadpalen_prov.index
+laadpalen_prov = laadpalen_prov[['Provincie', 'Aantal laadstations']]
 
 
 # Functie legenda definiëren
