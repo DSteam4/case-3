@@ -584,7 +584,7 @@ regmodel(dflpdpos['TotalEnergy'],dflpdpos[['ConnectedTime','ChargeTime']])
 
 fig, ax = plt.subplots(1, 2)
 
-fig.suptitle('**Dit moet nog een mooie titel worden**')
+fig.suptitle("Regressielijn energie uitgezet tegen 'tijd verbonden aan laadpaal' en 'laadtijd'")
 
 sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'], ax = ax[0],
            scatter_kws={"color": "black"}, line_kws={"color": "red"})
@@ -593,4 +593,4 @@ sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'], ax = ax[1],
            scatter_kws={"color": "black"}, line_kws={"color": "red"})
 ax[1].set(xlim=(0,80000),ylim=(0,24))
 
-st.pyplot(fig)
+st.pyplot(fig, height = 800)
