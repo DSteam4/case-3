@@ -582,7 +582,7 @@ def regmodel(Y, X):
 
 regmodel(dflpdpos['TotalEnergy'],dflpdpos[['ConnectedTime','ChargeTime']])
 
-fig, ax = plt.subplots(1, 2)
+fig, ax = plt.subplots(1, 2, figsize=(10, 10))
 
 fig.suptitle("Regressielijn energie uitgezet tegen 'tijd verbonden aan laadpaal' en 'laadtijd'")
 
