@@ -21,173 +21,174 @@ from streamlit_folium import folium_static
 
 st.set_page_config(page_title = 'Dashboard Case 3', layout = 'wide')
 
-df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
-df_ocm = requests.get(df_ocm_url).json()
+# df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
+# df_ocm = requests.get(df_ocm_url).json()
 
-df_ocm = pd.DataFrame.from_dict(df_ocm)
+# df_ocm = pd.DataFrame.from_dict(df_ocm)
 
-dftest = df_ocm
+# dftest = df_ocm
 
-# De dictionary in AddressInfo wordt opgesplitst in verschillende kolommen
-dfnew = pd.concat([dftest.drop(['AddressInfo'], axis = 1), dftest['AddressInfo'].apply(pd.Series).add_prefix('Address_')],
-                  axis = 1)
+# # De dictionary in AddressInfo wordt opgesplitst in verschillende kolommen
+# dfnew = pd.concat([dftest.drop(['AddressInfo'], axis = 1), dftest['AddressInfo'].apply(pd.Series).add_prefix('Address_')],
+#                   axis = 1)
 
-df_groot_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
-df_groot = requests.get(df_groot_url).json()
+# df_groot_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
+# df_groot = requests.get(df_groot_url).json()
 
-df_groot = pd.DataFrame.from_dict(df_groot)
+# df_groot = pd.DataFrame.from_dict(df_groot)
 
-#con_dict = (df_groot['Connections'])
+# #con_dict = (df_groot['Connections'])
 
-dfnew['Connections_groot'] = df_groot['Connections']
+# dfnew['Connections_groot'] = df_groot['Connections']
 
-AC1 = []
-AC3 = []
-DC = []
-onbekend = []
+# AC1 = []
+# AC3 = []
+# DC = []
+# onbekend = []
 
-for i in dfnew['Connections_groot']:
-    AC1_count = 0
-    AC3_count = 0
-    DC_count = 0
-    onbekend_count = 0
-    for j in i:
-        if j.get('CurrentType') is None:
-            onbekend_count += 1
-        elif j.get('CurrentType').get('Title') == 'AC (Single-Phase)':
-            AC1_count += 1
-        elif j.get('CurrentType').get('Title') == 'AC (Three-Phase)':
-            AC3_count += 1
-        elif j.get('CurrentType').get('Title') == 'DC':
-            DC_count += 1
-        else:
-            print("Error. Geen juiste CurrentType gevonden.")
+# for i in dfnew['Connections_groot']:
+#     AC1_count = 0
+#     AC3_count = 0
+#     DC_count = 0
+#     onbekend_count = 0
+#     for j in i:
+#         if j.get('CurrentType') is None:
+#             onbekend_count += 1
+#         elif j.get('CurrentType').get('Title') == 'AC (Single-Phase)':
+#             AC1_count += 1
+#         elif j.get('CurrentType').get('Title') == 'AC (Three-Phase)':
+#             AC3_count += 1
+#         elif j.get('CurrentType').get('Title') == 'DC':
+#             DC_count += 1
+#         else:
+#             print("Error. Geen juiste CurrentType gevonden.")
     
-    AC1.append(AC1_count)
-    AC3.append(AC3_count)
-    DC.append(DC_count)
-    onbekend.append(onbekend_count)
+#     AC1.append(AC1_count)
+#     AC3.append(AC3_count)
+#     DC.append(DC_count)
+#     onbekend.append(onbekend_count)
 
-dfnew['AC (Single-Phase)'] = AC1
-dfnew['AC (Three-Phase)'] = AC3
-dfnew['DC'] = DC
-dfnew['CurrentType onbekend'] = onbekend
+# dfnew['AC (Single-Phase)'] = AC1
+# dfnew['AC (Three-Phase)'] = AC3
+# dfnew['DC'] = DC
+# dfnew['CurrentType onbekend'] = onbekend
 
-lengths = []
-for i in dfnew['Connections_groot']:
-    lengths.append(len(i))
+# lengths = []
+# for i in dfnew['Connections_groot']:
+#     lengths.append(len(i))
     
-print('% AC (Single-Phase) van alle connecties: ' + str(round((sum(dfnew['AC (Single-Phase)'])/sum(lengths))*100, 2)))
-print('% AC (Three-Phase) van alle connecties: ' + str(round((sum(dfnew['AC (Three-Phase)'])/sum(lengths))*100, 2)))
-print('% DC van alle connecties: ' + str(round((sum(dfnew['DC'])/sum(lengths))*100, 2)))
-print('% type onbekend van alle connecties: ' + str(round((sum(dfnew['CurrentType onbekend'])/sum(lengths))*100, 2)))
+# print('% AC (Single-Phase) van alle connecties: ' + str(round((sum(dfnew['AC (Single-Phase)'])/sum(lengths))*100, 2)))
+# print('% AC (Three-Phase) van alle connecties: ' + str(round((sum(dfnew['AC (Three-Phase)'])/sum(lengths))*100, 2)))
+# print('% DC van alle connecties: ' + str(round((sum(dfnew['DC'])/sum(lengths))*100, 2)))
+# print('% type onbekend van alle connecties: ' + str(round((sum(dfnew['CurrentType onbekend'])/sum(lengths))*100, 2)))
 
-CurrentType_label = []
-CurrentType_color = []
-for index, row in dfnew.iterrows():
-    if (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) >= 1 and (row['DC'] >= 1):
-        CurrentType_label.append('AC/DC')
-        CurrentType_color.append('green')
-    elif (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) >= 1 and (row['DC'] == 0):
-        CurrentType_label.append('AC')
-        CurrentType_color.append('orange')
-    elif (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) == 0 and (row['DC'] >= 1):
-        CurrentType_label.append('DC')
-        CurrentType_color.append('blue')
-    elif (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) == 0 and (row['DC'] == 0):
-        CurrentType_label.append('onbekend')
-        CurrentType_color.append('black')
+# CurrentType_label = []
+# CurrentType_color = []
+# for index, row in dfnew.iterrows():
+#     if (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) >= 1 and (row['DC'] >= 1):
+#         CurrentType_label.append('AC/DC')
+#         CurrentType_color.append('green')
+#     elif (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) >= 1 and (row['DC'] == 0):
+#         CurrentType_label.append('AC')
+#         CurrentType_color.append('orange')
+#     elif (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) == 0 and (row['DC'] >= 1):
+#         CurrentType_label.append('DC')
+#         CurrentType_color.append('blue')
+#     elif (row['AC (Single-Phase)'] + row['AC (Three-Phase)']) == 0 and (row['DC'] == 0):
+#         CurrentType_label.append('onbekend')
+#         CurrentType_color.append('black')
         
-dfnew['CurrentType label'] = CurrentType_label
-dfnew['CurrentType color'] = CurrentType_color
+# dfnew['CurrentType label'] = CurrentType_label
+# dfnew['CurrentType color'] = CurrentType_color
 
-ConnectionTypes = []
+# ConnectionTypes = []
 
-for i in dfnew['Connections_groot']:
-    for j in i:
-        ConnectionTypes.append(j.get('ConnectionType').get('Title'))
+# for i in dfnew['Connections_groot']:
+#     for j in i:
+#         ConnectionTypes.append(j.get('ConnectionType').get('Title'))
 
-ConTypesUnique_beaut = list(dict.fromkeys(ConnectionTypes))
-ConTypesUnique = [re.sub('[\W_]+', '', x) for x in ConTypesUnique_beaut]
-ConTypesUnique
+# ConTypesUnique_beaut = list(dict.fromkeys(ConnectionTypes))
+# ConTypesUnique = [re.sub('[\W_]+', '', x) for x in ConTypesUnique_beaut]
+# ConTypesUnique
 
-dct_contypes = {}
-for i in ConTypesUnique:
-    dct_contypes[i] = []
+# dct_contypes = {}
+# for i in ConTypesUnique:
+#     dct_contypes[i] = []
 
-for key,val in dct_contypes.items():
-    exec(key + '=val')
+# for key,val in dct_contypes.items():
+#     exec(key + '=val')
 
-ConnectionType = []
-for i in dfnew['Connections_groot']:
-    temporary = []
-    for j in i:
-        temporary.append(j.get('ConnectionType').get('Title'))
-    ConnectionType.append(temporary)
+# ConnectionType = []
+# for i in dfnew['Connections_groot']:
+#     temporary = []
+#     for j in i:
+#         temporary.append(j.get('ConnectionType').get('Title'))
+#     ConnectionType.append(temporary)
 
-dfnew['ConnectionType'] = ConnectionType
+# dfnew['ConnectionType'] = ConnectionType
 
-statustypes = []
-for i in dfnew['Connections_groot']:
-    temporary = []
-    for j in i:
-        if j.get('StatusType') is not None:
-            temporary.append(j.get('StatusType').get('IsOperational'))
-    if True in temporary:
-        temporary2 = True
-    elif False in temporary:
-        temporary2 = False
-    else:
-        temporary2 = None
-    statustypes.append(temporary2)
+# statustypes = []
+# for i in dfnew['Connections_groot']:
+#     temporary = []
+#     for j in i:
+#         if j.get('StatusType') is not None:
+#             temporary.append(j.get('StatusType').get('IsOperational'))
+#     if True in temporary:
+#         temporary2 = True
+#     elif False in temporary:
+#         temporary2 = False
+#     else:
+#         temporary2 = None
+#     statustypes.append(temporary2)
 
-dfnew['StatusType'] = statustypes
+# dfnew['StatusType'] = statustypes
 
-geolocator = Nominatim(user_agent = 'geoapiExercises')
+# geolocator = Nominatim(user_agent = 'geoapiExercises')
 
-def town(lat, lng):
-    location = geolocator.reverse([lat, lng], timeout=10000)
-    town = location.raw.get('address').get('town')
-    return town
+# def town(lat, lng):
+#     location = geolocator.reverse([lat, lng], timeout=10000)
+#     town = location.raw.get('address').get('town')
+#     return town
 
-def village(lat, lng):
-    location = geolocator.reverse([lat, lng], timeout=10000)
-    village = location.raw.get('address').get('village')
-    return village
+# def village(lat, lng):
+#     location = geolocator.reverse([lat, lng], timeout=10000)
+#     village = location.raw.get('address').get('village')
+#     return village
 
-def state(lat, lng):
-    location = geolocator.reverse([lat, lng], timeout=10000)
-    state = location.raw.get('address').get('state')
-    return state
+# def state(lat, lng):
+#     location = geolocator.reverse([lat, lng], timeout=10000)
+#     state = location.raw.get('address').get('state')
+#     return state
 
-def postcode(lat, lng):
-    location = geolocator.reverse([lat, lng], timeout=10000)
-    postcode = location.raw.get('address').get('postcode')
-    return postcode
+# def postcode(lat, lng):
+#     location = geolocator.reverse([lat, lng], timeout=10000)
+#     postcode = location.raw.get('address').get('postcode')
+#     return postcode
   
-for index, column in dfnew.iterrows():
-    if pd.isna(column['Address_Town']):
-        if pd.isna(town(column['Address_Latitude'], column['Address_Longitude'])):
-            dfnew.iloc[index, dfnew.columns.get_loc('Address_Town')] = village(column['Address_Latitude'], column['Address_Longitude'])
-        else:
-            dfnew.iloc[index, dfnew.columns.get_loc('Address_Town')] = town(column['Address_Latitude'], column['Address_Longitude'])
+# for index, column in dfnew.iterrows():
+#     if pd.isna(column['Address_Town']):
+#         if pd.isna(town(column['Address_Latitude'], column['Address_Longitude'])):
+#             dfnew.iloc[index, dfnew.columns.get_loc('Address_Town')] = village(column['Address_Latitude'], column['Address_Longitude'])
+#         else:
+#             dfnew.iloc[index, dfnew.columns.get_loc('Address_Town')] = town(column['Address_Latitude'], column['Address_Longitude'])
        
-dfnew.loc[dfnew['Address_AddressLine1'] == 'Gijsbrecht van Amstelstraat', 'Address_Town'] = 'Hilversum'
-dfnew.loc[dfnew['Address_AddressLine1'] == 'Veerweg 10', 'Address_Town'] = 'Zwijndrecht'
-dfnew.loc[dfnew['Address_AddressLine1'] == 'Mastendreef 58', 'Address_Town'] = 'Bergen op Zoom'
+# dfnew.loc[dfnew['Address_AddressLine1'] == 'Gijsbrecht van Amstelstraat', 'Address_Town'] = 'Hilversum'
+# dfnew.loc[dfnew['Address_AddressLine1'] == 'Veerweg 10', 'Address_Town'] = 'Zwijndrecht'
+# dfnew.loc[dfnew['Address_AddressLine1'] == 'Mastendreef 58', 'Address_Town'] = 'Bergen op Zoom'
 
-for index, column in dfnew.iterrows():
-    if pd.isna(column['Address_Postcode']):
-        dfnew.iloc[index, dfnew.columns.get_loc('Address_Postcode')] = postcode(column['Address_Latitude'], column['Address_Longitude'])
+# for index, column in dfnew.iterrows():
+#     if pd.isna(column['Address_Postcode']):
+#         dfnew.iloc[index, dfnew.columns.get_loc('Address_Postcode')] = postcode(column['Address_Latitude'], column['Address_Longitude'])
 
-dfnew['UsageCost'].fillna('Onbekend', inplace = True)
-dfnew['NumberOfPoints'].fillna('Onbekend', inplace = True)
+# dfnew['UsageCost'].fillna('Onbekend', inplace = True)
+# dfnew['NumberOfPoints'].fillna('Onbekend', inplace = True)
 
-# Dit laadstation bevat onjuiste coördinaten dus deze veranderen we
-dfnew.loc[dfnew['Address_Title'] == 'Duintuin 7', 'Address_Latitude'] = 53.36383492660671
-dfnew.loc[dfnew['Address_Title'] == 'Duintuin 7', 'Address_Longitude'] = 5.215902212330321
+# # Dit laadstation bevat onjuiste coördinaten dus deze veranderen we
+# dfnew.loc[dfnew['Address_Title'] == 'Duintuin 7', 'Address_Latitude'] = 53.36383492660671
+# dfnew.loc[dfnew['Address_Title'] == 'Duintuin 7', 'Address_Longitude'] = 5.215902212330321
 
-df_openchargemap = dfnew
+# df_openchargemap = dfnew
+df_openchargemap = pd.read_csv('df_openchargemap.csv')
 
 # geojson van https://data.overheid.nl/dataset/10928-provinciegrenzen-nederland--gegeneraliseerd-vlak-bestand
 df_geo = gpd.read_file('provinciegrenzen.json')
