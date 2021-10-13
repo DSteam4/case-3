@@ -526,40 +526,6 @@ dflpdpos['CumConnected'] = dflpdpos["ConnectedTime"].cumsum()
 dflpdpos['CumCharge'] = dflpdpos["ChargeTime"].cumsum()
 dflpdpos['Vermogen'] = dflpdpos["TotalEnergy"]/dflpdpos["ChargeTime"]
 
-# De gemiddelde bezetting van een laadpaal
-TotMean = dflpdpos['TotalEnergy'].mean()
-ConMean = dflpdpos['ConnectedTime'].mean()
-CharMean = dflpdpos['ChargeTime'].mean()
-MaxMean = dflpdpos['MaxPower'].mean()
-
-# Verschil tussen laden en bezetten van een laadpaal
-figCon = go.Figure()
-
-figCon.add_trace(go.Box(y = dflpdpos['ConnectedTime'], name = 'Connected Time'))
-figCon.add_trace(go.Box(y = dflpdpos['ChargeTime'], name = 'Charge Time'))
-
-figConZoom = figCon
-figConZoom.update_layout(yaxis_range=[-3,25])
-figConZoom.show()
-st.plotly_chart(figConZoom)
-
-# Verschil tussen laden en bezetten van een laadpaal
-figConLine = go.Figure()
-
-figConLine.add_trace(go.Scatter(y = dflpdpos['CumConnected'], name = 'Connected Time'))
-figConLine.add_trace(go.Scatter(y = dflpdpos['CumCharge'], name = 'Charge Time'))
-figConLine.show()
-st.plotly_chart(figConLine)
-
-# Verdeling van vermogens
-figVer = go.Figure()
-
-figVer.add_trace(go.Histogram(x = dflpdpos['Vermogen']))
-
-figVer.update_layout(xaxis_range=[-3,15000])
-figVer.show()
-st.plotly_chart(figVer)
-
 CharMean = dflpdpos['ChargeTime'].mean()
 CharMedian = dflpdpos['ChargeTime'].median()
 
@@ -589,20 +555,3 @@ figLaad.add_annotation(x=CharMedian, y=0.295,
 
 figLaad.show()
 st.plotly_chart(figLaad)
-## Meerdere groepen met ChargeTime, waarschijnlijk meerdere verdelingen die met elkaar overlappen
-
-dflpdpos['StartTime'] = pd.to_datetime(dflpdpos['Started'], errors = 'coerce')
-dflpdpos['StartTime'] = dflpdpos['StartTime'].dropna()
-dflpdpos['StartTime'] = dflpdpos['StartTime'].apply(lambda x: x.time())
-
-sort = dflpdpos.sort_values('StartTime')
-
-# Scatterplot van tijd en laadtijd
-figTimeSca = go.Figure()
-
-figTimeSca.add_trace(go.Scatter(x = sort['StartTime'], y = dflpdpos['ConnectedTime'], mode = 'markers', marker=dict(color='red'), opacity=0.2))
-
-figTimeSca = px.scatter(sort, x = 'StartTime', y = 'ConnectedTime', opacity=0.2)
-figTimeSca.update_yaxes(range = [-1, 24])
-figTimeSca.show()
-st.plotly_chart(figTimeSca)
