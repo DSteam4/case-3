@@ -29,11 +29,11 @@ st.markdown('''De data die gebruikt wordt voor dit dashboard komt van drie versc
 *Rijksdienst voor het Wegverkeer (RDW)* (https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773 en https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2)  
 De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets zijn als csv binnengehaald, samengevoegd en vervolgens *geïnspecteerd*.  
 
-<*font color = 'red'>
+<font color = 'red'>
 •	duplicates  
 •	missende waardes  
 •	nieuwe variabelen  
-</*font>''')
+</font>''')
 
 # df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
 # df_ocm = requests.get(df_ocm_url).json()
