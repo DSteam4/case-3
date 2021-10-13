@@ -19,6 +19,7 @@ import streamlit_folium
 import rtree
 from streamlit_folium import folium_static
 import plotly.figure_factory as ff
+import statsmodels.api as sm
 
 st.set_page_config(page_title = 'Dashboard Case 3', layout = 'wide')
 st.title("Dashboard elektrische auto's, laadstations en laadpaalgebruik")
@@ -50,8 +51,6 @@ De data over het laadpaalgebruik is verstrekt als csv door de Hogeschool van Ams
 •	...(outliers)  
 
 ''')
-
-st.header("Regressie")
 
 st.header("Aantallen auto's per brandstofcategorie")
 
@@ -569,3 +568,22 @@ figTimeSca.update_yaxes(title = 'Tijd verbonden aan laadpaal (in uren)', range =
 figTimeSca.update_xaxes(title = 'Starttijd van de laadsessie (tijdstempel)')
 figTimeSca.show()
 st.plotly_chart(figTimeSca)
+
+st.header("Regressie")
+
+def regmodel(Y, X):
+    X = sm.add_constant(X) # adding a constant
+    model = sm.OLS(Y, X).fit()
+    predictions = model.predict(X) 
+    print_model = model.summary()
+    rsquared = model.rsquared
+    return print_model, rsquared
+
+regmodel(dflpdpos['TotalEnergy'],dflpdpos[['ConnectedTime','ChargeTime']])
+
+g1 = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'])
+st.pyplot(g1)
+
+g2 = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'])
+g2.set(xlim=(0,80000),ylim=(0,24))
+st.pyplot(g2)
