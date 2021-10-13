@@ -246,6 +246,7 @@ laadpalen_prov = pd.DataFrame(sjoin['PROV_NAAM'].value_counts().sort_values(asce
 laadpalen_prov.columns = ['Aantal laadstations']
 laadpalen_prov['Provincie'] = laadpalen_prov.index
 laadpalen_prov = laadpalen_prov[['Provincie', 'Aantal laadstations']]
+laadpalen_prov = laadpalen_prov.to_string(index = False)
 
 
 # Functie legenda definiëren
@@ -511,6 +512,6 @@ col1, col2 = st.columns([5,2])
 with col1:
     folium_static(m_dual, width = 1200, height = 800)
 with col2:
-    laadpalen_prov.to_string(index = False)
+    laadpalen_prov
 
 st.header("Laadpaalgebruik")
