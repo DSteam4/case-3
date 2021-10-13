@@ -464,4 +464,4 @@ operationtype_leg = add_categorical_legend(m_dual, 'Werking laadstation', colors
 
 folium.LayerControl(position = 'topleft').add_to(m_dual)
 
-folium_static(m_dual, width = 1500)
+folium_static(m_dual, width = 1200, height = 800)
