@@ -595,3 +595,30 @@ sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'], ax = ax[1],
 ax[1].set(xlim=(0,80000), ylim=(0,24), xlabel = 'Totaal verbruikte energie (in Wh)', ylabel = 'Laadtijd (in uren)')
 
 st.pyplot(fig)
+
+Benzine = pd.read_csv('Benzine.csv')
+Diesel = pd.read_csv('Diesel.csv')
+Elektriciteit = pd.read_csv('Elektriciteit.csv')
+LPG = pd.read_csv('LPG.csv')
+CNG = pd.read_csv('CNG.csv')
+Alcohol = pd.read_csv('Alcohol.csv')
+LNG = pd.read_csv('LNG.csv')
+Waterstof = pd.read_csv('Waterstof.csv')
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(x = Benzine['Datum eerste afgifte Nederland'], y = Benzine['Cumulative'], name = 'Benzine'))
+fig.add_trace(go.Scatter(x = Diesel['Datum eerste afgifte Nederland'], y = Diesel['Cumulative'], name = 'Diesel'))
+fig.add_trace(go.Scatter(x = Elektriciteit['Datum eerste afgifte Nederland'], y = Elektriciteit['Cumulative'], name = 'Elektriciteit'))
+fig.add_trace(go.Scatter(x = LPG['Datum eerste afgifte Nederland'], y = LPG['Cumulative'], name = 'LPG'))
+fig.add_trace(go.Scatter(x = CNG['Datum eerste afgifte Nederland'], y = CNG['Cumulative'], name = 'CNG'))
+fig.add_trace(go.Scatter(x = Alcohol['Datum eerste afgifte Nederland'], y = Alcohol['Cumulative'], name = 'Alcohol'))
+fig.add_trace(go.Scatter(x = LNG['Datum eerste afgifte Nederland'], y = LNG['Cumulative'], name = 'LNG'))
+fig.add_trace(go.Scatter(x = Waterstof['Datum eerste afgifte Nederland'], y = Waterstof['Cumulative'], name = 'Waterstof'))
+
+fig.update_layout(title = "Cumulatief aantal auto's per brandstof categorie",
+                     yaxis_title = "Aantal auto's",
+                     xaxis_title = 'Maand',
+                     xaxis = dict(dtick = "M1"))
+fig.show()
+st.plotly_chart(fig)
