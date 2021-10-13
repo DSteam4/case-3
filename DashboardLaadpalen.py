@@ -20,6 +20,7 @@ import rtree
 from streamlit_folium import folium_static
 import plotly.figure_factory as ff
 import statsmodels.api as sm
+import matplotlib.pyplot
 
 st.set_page_config(page_title = 'Dashboard Case 3', layout = 'wide')
 st.title("Dashboard elektrische auto's, laadstations en laadpaalgebruik")
