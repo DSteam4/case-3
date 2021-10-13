@@ -428,7 +428,7 @@ for index, row in sjoin.iterrows():
     for i, r in contypes_groups_beaut.iterrows():
         if r['beaut'] in row['ConnectionType']:
             folium.Marker(location=[row['Address_Latitude'], row['Address_Longitude']], tooltip = row['Address_Title'],
-                          popup = '<b>Adres:</b><br>' + str(row['Address_AddressLine1']) + '<br>' + str(row['Address_Postcode']) + '<br>' + str(row['Address_Town']) + '<br><br>' + '<b>Prijs: </b>' + str(row['UsageCost']) + '<br><br>' + '<b>Type aansluiting: </b>' + ' '.join(row['ConnectionType']) + '<br><br>' + '<b>Stroomtype: </b>' + str(row['CurrentType label']) + '<br><br>' + '<b>Aantal laadpunten: </b>' + str(row['NumberOfPoints']),
+                          popup = '<b>Adres:</b><br>' + str(row['Address_AddressLine1']) + '<br>' + str(row['Address_Postcode']) + '<br>' + str(row['Address_Town']) + '<br><br>' + '<b>Prijs: </b>' + str(row['UsageCost']) + '<br><br>' + '<b>Type aansluiting: </b>' + str(row['ConnectionType']) + '<br><br>' + '<b>Stroomtype: </b>' + str(row['CurrentType label']) + '<br><br>' + '<b>Aantal laadpunten: </b>' + str(row['NumberOfPoints']),
                           icon=folium.Icon(color=('lightgray' if row['StatusType'] == False else row['CurrentType color']),
                                            icon='plug', prefix='fa')).add_to(groups_contypes[r['groups']])
 
