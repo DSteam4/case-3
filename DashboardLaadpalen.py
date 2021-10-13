@@ -565,6 +565,7 @@ sort = dflpdpos.sort_values('StartTime')
 
 # Scatterplot van tijd en laadtijd
 figTimeSca = px.scatter(sort, x = 'StartTime', y = 'ConnectedTime', opacity=0.2)
-figTimeSca.update_yaxes(range = [-1, 24])
+figTimeSca.update_yaxes(title = 'Tijd verbonden aan laadpaal (in uren)', range = [-1, 24])
+figTimeSca.update_xaxes(title = 'Starttijd van de laadsessie (tijdstempel)')
 figTimeSca.show()
 st.plotly_chart(figTimeSca)
