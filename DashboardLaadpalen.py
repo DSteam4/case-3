@@ -511,6 +511,6 @@ col1, col2 = st.columns([5,2])
 with col1:
     folium_static(m_dual, width = 1200, height = 800)
 with col2:
-    laadpalen_prov[['Provincie', 'Aantal laadstations']]
+    laadpalen_prov.to_string(index = False)
 
 st.header("Laadpaalgebruik")
