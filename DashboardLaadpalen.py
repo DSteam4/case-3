@@ -22,7 +22,7 @@ from streamlit_folium import folium_static
 st.set_page_config(page_title = 'Dashboard Case 3', layout = 'wide')
 st.title("Dashboard elektrische auto's, laadstations en laadpaalgebruik")
 st.markdown('Vincent Kemme (500838439), Rhodé Rebel (500819128), Amber van der Pol (500803136) en Oussama Abou (500803060)')
-st.markdown('''Dit interactieve dashboard geeft weer hoe de geïnspecteerde data verdeeld is. Het dashboard geeft bijvoorbeeld inzichten over hoe de brandstoftypes van auto’s verdeeld zijn, hoe laadstations verdeeld zijn over Nederland en hoe laadtijden per sessie verdeeld zijn.'''
+st.markdown('''Dit interactieve dashboard geeft weer hoe de geïnspecteerde data verdeeld is. Het dashboard geeft bijvoorbeeld inzichten over hoe de brandstoftypes van auto’s verdeeld zijn, hoe laadstations verdeeld zijn over Nederland en hoe laadtijden per sessie verdeeld zijn.''')
 st.header("Databronnen")
 st.markdown('''De data die gebruikt wordt voor dit dashboard komt van drie verschillende bronnen.  
 
@@ -32,7 +32,7 @@ De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets
 •	duplicates  
 •	missende waardes  
 •	nieuwe variabelen  
-'''
+''')
 
 # df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
 # df_ocm = requests.get(df_ocm_url).json()
