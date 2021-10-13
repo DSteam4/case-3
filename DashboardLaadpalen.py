@@ -306,7 +306,7 @@ def add_categorical_legend(folium_map, title, colors, labels):
 
     return folium_map
   
-m_dual = folium.plugins.DualMap(location=[52.0893191, 5.1101691], zoom_start = 7, tiles = 'cartodb positron')
+m_dual = folium.plugins.DualMap(location=[52.0893191, 5.1101691], width = '150%', zoom_start = 7, tiles = 'cartodb positron')
 
 mcl = folium.plugins.MarkerCluster(showCoverageOnHover = False, disableClusteringAtZoom = 14, control = False).add_to(m_dual.m1)
 
