@@ -1,0 +1,18 @@
+ConTypesUnique,ConTypesUnique_beaut
+AvconConnector,Avcon Connector
+CCSType1,CCS (Type 1)
+CCSType2,CCS (Type 2)
+CEE5Pin,CEE 5 Pin
+CEE74SchukoTypeF,CEE 7/4 - Schuko - Type F
+CEE75,CEE 7/5
+CEE7Pin,CEE+ 7 Pin
+CHAdeMO,CHAdeMO
+Europlug2PinCEE716,Europlug 2-Pin (CEE 7/16)
+IEC603095pin,IEC 60309 5-pin
+TeslaModelSX,Tesla (Model S/X)
+TeslaRoadster,Tesla (Roadster)
+TeslaSupercharger,Tesla Supercharger
+Type1J1772,Type 1 (J1772)
+Type2SocketOnly,Type 2 (Socket Only)
+Type2TetheredConnector,Type 2 (Tethered Connector) 
+Unknown,Unknown
