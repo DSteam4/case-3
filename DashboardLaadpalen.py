@@ -537,9 +537,9 @@ group_labels = ['']
 figLaad = ff.create_distplot(hist_date, group_labels, bin_size=0.25)
 
 figLaad.update_layout(xaxis_range=[-0.2,10], showlegend=False, 
-                     title = 'Laadtijden per kwartier',
-                     yaxis_title = 'Relatief aantal keer laden',
-                     xaxis_title = 'Lengte van het laden')
+                     title = 'Relatief aantal laadsessies per laadtijd',
+                     yaxis_title = 'Relatief aantal laadsessies',
+                     xaxis_title = 'Laadtijd in uren (met bins van een kwartier)')
 
 figLaad.add_annotation(x=CharMean, y=0.25,
             text="Gemiddelde (2.49)",
