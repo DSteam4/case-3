@@ -20,7 +20,7 @@ import rtree
 from streamlit_folium import folium_static
 import plotly.figure_factory as ff
 import statsmodels.api as sm
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title = 'Dashboard Case 3', layout = 'wide')
 st.title("Dashboard elektrische auto's, laadstations en laadpaalgebruik")
@@ -582,9 +582,10 @@ def regmodel(Y, X):
 
 regmodel(dflpdpos['TotalEnergy'],dflpdpos[['ConnectedTime','ChargeTime']])
 
-g1 = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'])
-st.pyplot(g1)
+fig, ax = plt.subplots()
+
+ax = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ConnectedTime'])
+st.pyplot(fig)
 
 g2 = sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'])
 g2.set(xlim=(0,80000),ylim=(0,24))
-st.pyplot(p2)
