@@ -411,11 +411,10 @@ m_dual.m2.add_child(g_drenthe)
 m_dual.m2.add_child(g_groningen)
 m_dual.m2.add_child(g_friesland)
 
-ConTypesUnique = sorted(ConTypesUnique)
-ConTypesUnique_beaut = sorted(ConTypesUnique_beaut)
+unique_contypes = pd.read_csv('unique_contypes.csv')
 
 groups_contypes = {}
-for i, j in zip(ConTypesUnique, ConTypesUnique_beaut):
+for i, j in zip(unique_contypes['ConTypesUnique'], unique_contypes['ConTypesUnique_beaut']):
     groups_contypes['g_%s' % i] = folium.plugins.FeatureGroupSubGroup(mcl, name = str(j))
 
 for key,val in dct_contypes.items():
@@ -423,7 +422,7 @@ for key,val in dct_contypes.items():
 
 groups_contypes_list = list(groups_contypes.keys())
 
-contypes_groups_beaut = pd.DataFrame({'groups':groups_contypes_list, 'beaut': ConTypesUnique_beaut})
+contypes_groups_beaut = pd.DataFrame({'groups':groups_contypes_list, 'beaut': unique_contypes['ConTypesUnique_beaut']})
 contypes_groups_beaut
 
 for index, row in sjoin.iterrows():
