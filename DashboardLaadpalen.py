@@ -351,7 +351,7 @@ friesland_cluster = MarkerCluster(showCoverageOnHover = False, disableClustering
 for index, row in sjoin.iterrows():
     if row['PROV_NAAM'] == 'Limburg':
         folium.Marker(location=[row['Address_Latitude'], row['Address_Longitude']], tooltip = row['Address_Title'],
-                      popup = '<b>Adres:</b><br>' + str(row['Address_AddressLine1']) + '<br>' + str(row['Address_Postcode']) + '<br>' + str(row['Address_Town']) + '<br><br>' + '<b>Prijs: </b>' + str(row['UsageCost']) + '<br><br>' + '<b>Type aansluiting: </b>' + ''.join(map(str, row['ConnectionType']) + '<br><br>' + '<b>Stroomtype: </b>' + str(row['CurrentType label']) + '<br><br>' + '<b>Aantal laadpunten: </b>' + str(row['NumberOfPoints']),
+                      popup = '<b>Adres:</b><br>' + str(row['Address_AddressLine1']) + '<br>' + str(row['Address_Postcode']) + '<br>' + str(row['Address_Town']) + '<br><br>' + '<b>Prijs: </b>' + str(row['UsageCost']) + '<br><br>' + '<b>Type aansluiting: </b>' + ''.join(str(row['ConnectionType'])) + '<br><br>' + '<b>Stroomtype: </b>' + str(row['CurrentType label']) + '<br><br>' + '<b>Aantal laadpunten: </b>' + str(row['NumberOfPoints']),
                       icon=folium.Icon(color=row['CurrentType color'], icon='plug', prefix='fa')).add_to(limburg_cluster)
     elif row['PROV_NAAM'] == 'Zeeland':
         folium.Marker(location=[row['Address_Latitude'], row['Address_Longitude']], tooltip = row['Address_Title'],
