@@ -16,6 +16,7 @@ from shapely.geometry import Point
 import re
 import seaborn as sns
 import streamlit_folium
+import rtree
 
 df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
 df_ocm = requests.get(df_ocm_url).json()
