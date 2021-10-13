@@ -511,6 +511,6 @@ col1, col2 = st.columns([5,2])
 with col1:
     folium_static(m_dual, width = 1200, height = 800)
 with col2:
-    st.table(laadpalen_prov)
+    st.dataframe(laadpalen_prov.assign(hack='').set_index('hack'))
 
 st.header("Laadpaalgebruik")
