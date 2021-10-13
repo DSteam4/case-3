@@ -594,4 +594,4 @@ sns.regplot(x = dflpdpos['TotalEnergy'], y = dflpdpos['ChargeTime'], ax = ax[1],
            scatter_kws={"color": "black"}, line_kws={"color": "red"})
 ax[1].set(xlim=(0,80000), ylim=(0,24), xlabel = 'Totaal verbruikte energie (in Wh)', ylabel = 'Laadtijd (in uren)')
 
-st.pyplot(fig, height = 500)
+st.pyplot(fig)
