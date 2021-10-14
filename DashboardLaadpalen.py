@@ -619,12 +619,12 @@ col1, col2 = st.columns(2)
 with col1:
   #col1.header("Time scatter")
   st.info("In dit histogram van de laadtijd in uren wordt er gekeken hoelang een elektrische auto nu eigenlijk opgeladen wordt per sessie. Ook is er een benadering van de kansdichtheidsfunctie overheen gelegd, deze toont meerdere pieken, de ene duidelijker dan de andere. Dit kan meerdere dingen betekenen, de piek rond 2 uur kan bijvoorbeeld betekenen dat het efficiënt is om je auto ongeveer 2 uur op te laden. Het lijkt er in ieder geval op dat er meerdere verdelingen samen de kansdichtheidsfunctie vormen. Aangezien er ook meerdere types en merken elektrische auto’s zijn, is dit geen rare waarneming.")
-  plotly_chart(figLaad)
+  st.plotly_chart(figLaad)
 
 with col2:
   #col2.header("Laadtijd")
   st.info("Hier zijn de starttijd van de laadsessie en de tijd verbonden aan de laadpaal tegen elkaar geplot. We zien dat er een verdeling is tussen twee verschillende wolken met een lege zone in het midden. Hieruit kan je de laadprofielen uitlezen. Het is te zien dat mensen op vrijwel elk moment van de dag hun auto aan de lader aansluiten, maar de lege zone geeft aan dat mensen de auto vrijwel nooit tussen 00:00 en 05:00 weer van de lader afhalen.")
-  plotly_chart(figTimeSca)
+  st.plotly_chart(figTimeSca)
 
 st.header("Regressie")
 
