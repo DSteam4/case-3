@@ -75,7 +75,7 @@ fig.add_trace(go.Scatter(x = Alcohol['Datum eerste afgifte Nederland'], y = Alco
 fig.add_trace(go.Scatter(x = LNG['Datum eerste afgifte Nederland'], y = LNG['Cumulative'], name = 'LNG'))
 fig.add_trace(go.Scatter(x = Waterstof['Datum eerste afgifte Nederland'], y = Waterstof['Cumulative'], name = 'Waterstof'))
 
-fig.update_layout(title = "**Cumulatief aantal auto's per brandstofcategorie in 2020**",
+fig.update_layout(title = "<b>Cumulatief aantal auto's per brandstofcategorie in 2020</b>",
                      yaxis_title = "Aantal auto's",
                      xaxis_title = 'Maand',
                      xaxis = dict(dtick = "M1"),
