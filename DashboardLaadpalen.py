@@ -27,31 +27,35 @@ st.title("Dashboard elektrische auto's, laadstations en laadpaalgebruik")
 st.markdown('Vincent Kemme (500838439), Rhodé Rebel (500819128), Amber van der Pol (500803136) en Oussama Abou (500803060)')
 st.info('''Dit interactieve dashboard geeft weer hoe de geïnspecteerde data verdeeld is. Het dashboard geeft bijvoorbeeld inzichten over hoe de brandstoftypes van auto’s verdeeld zijn, hoe laadstations verdeeld zijn over Nederland en hoe laadtijden per sessie verdeeld zijn.''')
 st.header("Databronnen")
-st.markdown('''De data die gebruikt wordt voor dit dashboard komt van drie verschillende bronnen.  
+st.markdown('''De data die gebruikt wordt voor dit dashboard komt van drie verschillende bronnen.''')
 
-**Rijksdienst voor het Wegverkeer (RDW)** (https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773 en https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2)  
-De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets zijn als csv binnengehaald, samengevoegd en vervolgens **geïnspecteerd**.  
+col1, col2, col3 = st.columns(3)
 
-•	In de datasets komen geen **duplicates** voor.  
-•	**Missende waardes** zijn niet meegenomen in de visualisatie van de data.  
-•	Bij het inspecteren van deze data zijn geen nieuwe variabelen gegenereerd maar is er wel een **nieuwe dataset** gecreëerd door twee datasets te mergen.  
+with col1:
+  st.markdown('''**Rijksdienst voor het Wegverkeer (RDW)** (https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773 en https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2)  
+  De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets zijn als csv binnengehaald, samengevoegd en vervolgens **geïnspecteerd**.  
+  
+  •	In de datasets komen geen **duplicates** voor.  
+  •	**Missende waardes** zijn niet meegenomen in de visualisatie van de data.  
+  •	Bij het inspecteren van deze data zijn geen nieuwe variabelen gegenereerd maar is er wel een **nieuwe dataset** gecreëerd door twee datasets te mergen.  ''')
 
-**OpenChargeMap** (https://openchargemap.org/site/develop/api)  
-De data over laadstations in Nederland komt van OpenChargeMap. Deze data is via API binnengehaald en vervolgens **geïnspecteerd**.  
+with col2:
+  st.markdown('''**OpenChargeMap** (https://openchargemap.org/site/develop/api)  
+  De data over laadstations in Nederland komt van OpenChargeMap. Deze data is via API binnengehaald en vervolgens **geïnspecteerd**.  
+  
+  •	In de dataset komen geen **duplicates** voor, er zijn dan ook geen waarnemingen uit de set verwijderd.  
+  •	**Missende waardes** zijn ook niet uit de set verwijderd, maar opgevuld. Missende waardes met betrekking tot adres zijn opgevuld aan de hand van de coördinaten en Geolocator. Missende waardes met betrekking tot kenmerken van de laadstations zijn opgevuld met de tekst ‘onbekend’, zodat deze als zodanig in een popup-tekst worden weergegeven.  
+  •	Bij het inspecteren van de data zijn **nieuwe variabelen** gegenereerd. Zo zijn bijvoorbeeld de stroomtypes (AC, DC, beide of onbekend) uit een geneste dictonary gehaald en in een nieuwe kolom gezet.  ''')
 
-•	In de dataset komen geen **duplicates** voor, er zijn dan ook geen waarnemingen uit de set verwijderd.  
-•	**Missende waardes** zijn ook niet uit de set verwijderd, maar opgevuld. Missende waardes met betrekking tot adres zijn opgevuld aan de hand van de coördinaten en Geolocator. Missende waardes met betrekking tot kenmerken van de laadstations zijn opgevuld met de tekst ‘onbekend’, zodat deze als zodanig in een popup-tekst worden weergegeven.  
-•	Bij het inspecteren van de data zijn **nieuwe variabelen** gegenereerd. Zo zijn bijvoorbeeld de stroomtypes (AC, DC, beide of onbekend) uit een geneste dictonary gehaald en in een nieuwe kolom gezet.  
-
-**Data laadpaalgebruik** (bijgeleverde csv, Hogeschool van Amsterdam)
-De data over het laadpaalgebruik is verstrekt als csv door de Hogeschool van Amsterdam. Deze data is dus als csv ingelezen en vervolgens **geïnspecteerd**.
-
-•	De dataset bevat geen **duplicates**.  
-•	**Missende waardes** komen ook niet voor in deze dataset.  
-•	De dataset bevat negatieve laadtijden die als **outliers** beschouwd zijn. Deze laadtijden zijn daarom weggelaten bij het visualiseren van de data.  
-•	Ook bevat de dataset een **foutieve datum**: 29 februari 2018. 2018 was geen schrikkeljaar. De waarneming die bij deze datum hoort is daarom weggelaten.  
-•	Er is bij het inspecteren van de data een **nieuwe variabele** ‘StartTime’ gecreëerd door alleen de tijden uit de ‘Started’ kolom (een kolom met datum en tijd) te selecteren. Deze variabele is gebruikt in de spreidingsdiagram.  
-
+with col3:
+  st.markdown('''**Data laadpaalgebruik** (bijgeleverde csv, Hogeschool van Amsterdam)  
+  De data over het laadpaalgebruik is verstrekt als csv door de Hogeschool van Amsterdam. Deze data is dus als csv ingelezen en vervolgens **geïnspecteerd**.  
+  
+  •	De dataset bevat geen **duplicates**.  
+  •	**Missende waardes** komen ook niet voor in deze dataset.  
+  •	De dataset bevat negatieve laadtijden die als **outliers** beschouwd zijn. Deze laadtijden zijn daarom weggelaten bij het visualiseren van de data.  
+  •	Ook bevat de dataset een **foutieve datum**: 29 februari 2018. 2018 was geen schrikkeljaar. De waarneming die bij deze datum hoort is daarom weggelaten.  
+  •	Er is bij het inspecteren van de data een **nieuwe variabele** ‘StartTime’ gecreëerd door alleen de tijden uit de ‘Started’ kolom (een kolom met datum en tijd) te selecteren. Deze variabele is gebruikt in de spreidingsdiagram.  
 ''')
 
 st.header("Aantallen auto's per brandstofcategorie")
