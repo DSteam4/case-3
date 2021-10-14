@@ -32,23 +32,27 @@ st.markdown('''De data die gebruikt wordt voor dit dashboard komt van drie versc
 col1, col2, col3 = st.columns(3)
 
 with col1:
-  st.markdown('''**Rijksdienst voor het Wegverkeer (RDW)** (https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773 en https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2)  
+  st.markdown('''**Rijksdienst voor het Wegverkeer (RDW)**  
   De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets zijn als csv binnengehaald, samengevoegd en vervolgens **geïnspecteerd**.  
   
   •	In de datasets komen geen **duplicates** voor.  
   •	**Missende waardes** zijn niet meegenomen in de visualisatie van de data.  
-  •	Bij het inspecteren van deze data zijn geen nieuwe variabelen gegenereerd maar is er wel een **nieuwe dataset** gecreëerd door twee datasets te mergen.  ''')
+  •	Bij het inspecteren van deze data zijn geen nieuwe variabelen gegenereerd maar is er wel een **nieuwe dataset** gecreëerd door twee datasets te mergen.  
+  
+  bron: https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773 en https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2''')
 
 with col2:
-  st.markdown('''**OpenChargeMap** (https://openchargemap.org/site/develop/api)  
+  st.markdown('''**OpenChargeMap**  
   De data over laadstations in Nederland komt van OpenChargeMap. Deze data is via API binnengehaald en vervolgens **geïnspecteerd**.  
   
   •	In de dataset komen geen **duplicates** voor, er zijn dan ook geen waarnemingen uit de set verwijderd.  
   •	**Missende waardes** zijn ook niet uit de set verwijderd, maar opgevuld. Missende waardes met betrekking tot adres zijn opgevuld aan de hand van de coördinaten en Geolocator. Missende waardes met betrekking tot kenmerken van de laadstations zijn opgevuld met de tekst ‘onbekend’, zodat deze als zodanig in een popup-tekst worden weergegeven.  
-  •	Bij het inspecteren van de data zijn **nieuwe variabelen** gegenereerd. Zo zijn bijvoorbeeld de stroomtypes (AC, DC, beide of onbekend) uit een geneste dictonary gehaald en in een nieuwe kolom gezet.  ''')
+  •	Bij het inspecteren van de data zijn **nieuwe variabelen** gegenereerd. Zo zijn bijvoorbeeld de stroomtypes (AC, DC, beide of onbekend) uit een geneste dictonary gehaald en in een nieuwe kolom gezet.  
+  
+  bron: https://openchargemap.org/site/develop/api''')
 
 with col3:
-  st.markdown('''**Data laadpaalgebruik** (bijgeleverde csv, Hogeschool van Amsterdam)  
+  st.markdown('''**Data laadpaalgebruik**    
   De data over het laadpaalgebruik is verstrekt als csv door de Hogeschool van Amsterdam. Deze data is dus als csv ingelezen en vervolgens **geïnspecteerd**.  
   
   •	De dataset bevat geen **duplicates**.  
@@ -56,6 +60,8 @@ with col3:
   •	De dataset bevat negatieve laadtijden die als **outliers** beschouwd zijn. Deze laadtijden zijn daarom weggelaten bij het visualiseren van de data.  
   •	Ook bevat de dataset een **foutieve datum**: 29 februari 2018. 2018 was geen schrikkeljaar. De waarneming die bij deze datum hoort is daarom weggelaten.  
   •	Er is bij het inspecteren van de data een **nieuwe variabele** ‘StartTime’ gecreëerd door alleen de tijden uit de ‘Started’ kolom (een kolom met datum en tijd) te selecteren. Deze variabele is gebruikt in de spreidingsdiagram.  
+  
+  bron: bijgeleverde csv, Hogeschool van Amsterdam
 ''')
 
 st.header("Aantallen auto's per brandstofcategorie")
