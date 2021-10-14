@@ -32,9 +32,9 @@ st.markdown('''De data die gebruikt wordt voor dit dashboard komt van drie versc
 **Rijksdienst voor het Wegverkeer (RDW)** (https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen_brandstof/8ys7-d773 en https://opendata.rdw.nl/Voertuigen/Open-Data-RDW-Gekentekende_voertuigen/m9d7-ebf2)  
 De data over auto’s en hun brandstoftypes komt van het RDW. Deze twee datasets zijn als csv binnengehaald, samengevoegd en vervolgens **geïnspecteerd**.  
 
-•	...(duplicates)  
-•	...(missende waardes)  
-•	...(nieuwe variabelen)  
+•	In de datasets komen geen **duplicates** voor.  
+•	**Missende waardes** zijn niet meegenomen in de visualisatie van de data.  
+•	Bij het inspecteren van deze data zijn geen nieuwe variabelen gegenereerd maar is er wel een **nieuwe dataset** gecreëerd door twee datasets te mergen.  
 
 **OpenChargeMap** (https://openchargemap.org/site/develop/api)  
 De data over laadstations in Nederland komt van OpenChargeMap. Deze data is via API binnengehaald en vervolgens **geïnspecteerd**.  
