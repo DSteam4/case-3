@@ -46,10 +46,11 @@ De data over laadstations in Nederland komt van OpenChargeMap. Deze data is via 
 **Data laadpaalgebruik** (bijgeleverde csv, Hogeschool van Amsterdam)
 De data over het laadpaalgebruik is verstrekt als csv door de Hogeschool van Amsterdam. Deze data is dus als csv ingelezen en vervolgens **geïnspecteerd**.
 
-•	...(duplicates)  
-•	...(missende waardes)  
-•	...(nieuwe variabelen)  
-•	...(outliers)  
+•	De dataset bevat geen **duplicates**.  
+•	**Missende waardes** komen ook niet voor in deze dataset.  
+•	De dataset bevat negatieve laadtijden die als **outliers** beschouwd zijn. Deze laadtijden zijn daarom weggelaten bij het visualiseren van de data.  
+•	Ook bevat de dataset een **foutieve datum**: 29 februari 2018. 2018 was geen schrikkeljaar. De waarneming die bij deze datum hoort is daarom weggelaten.  
+•	Er is bij het inspecteren van de data een **nieuwe variabele** ‘StartTime’ gecreëerd door alleen de tijden uit de ‘Started’ kolom (een kolom met datum en tijd) te selecteren. Deze variabele is gebruikt in de spreidingsdiagram.  
 
 ''')
 
