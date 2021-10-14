@@ -97,10 +97,10 @@ col1, col2 = st.columns(2)
 with col1:
   st.plotly_chart(fig)
 with col2:
-  st.markdown("De cumulatieve lijndiagram hiernaast geeft het aantal (aangekochte) auto's per maand (in 2020) per brandstofcategorie weer. In de legenda kunnen brandstofcategorieën geselecteerd worden zodat elke lijn ook individueel bekeken kan worden.")
+  st.info("De cumulatieve lijndiagram hiernaast geeft het aantal (aangekochte) auto's per maand (in 2020) per brandstofcategorie weer. In de legenda kunnen brandstofcategorieën geselecteerd worden zodat elke lijn ook individueel bekeken kan worden.")
 
 st.header("Laadstations in Nederland")
-st.markdown('''Onderstaande interactieve kaart bestaat uit twee subkaarten. Beide kaarten tonen de laadstations verdeeld over Nederland. Als er wordt ingezoomd zijn alle laadstations individueel te bekijken. Wanneer er op de marker geklikt wordt, worden bepaalde eigenschappen van het laadstation getoond.  
+st.info('''Onderstaande interactieve kaart bestaat uit twee subkaarten. Beide kaarten tonen de laadstations verdeeld over Nederland. Als er wordt ingezoomd zijn alle laadstations individueel te bekijken. Wanneer er op de marker geklikt wordt, worden bepaalde eigenschappen van het laadstation getoond.  
 De legenda geeft – voor beide kaarten – weer welke kleur van een laadstation welk stroomtype vertegenwoordigd. Een lichtgrijze marker betekent dat het laadstation niet in werking is.  
 
 De eerste kaart (links) bevat een filter waarbij gefilterd kan worden op het type aansluiting.  
@@ -616,12 +616,20 @@ figTimeSca.show()
 # st.plotly_chart(figTimeSca)
 
 col1, col2 = st.columns(2)
-#col1.header("Time scatter")
-col1.plotly_chart(figLaad)
-#col2.header("Laadtijd")
-col2.plotly_chart(figTimeSca)
+with col1:
+  #col1.header("Time scatter")
+  st.info("In dit histogram van de laadtijd in uren wordt er gekeken hoelang een elektrische auto nu eigenlijk opgeladen wordt per sessie. Ook is er een benadering van de kansdichtheidsfunctie overheen gelegd, deze toont meerdere pieken, de ene duidelijker dan de andere. Dit kan meerdere dingen betekenen, de piek rond 2 uur kan bijvoorbeeld betekenen dat het efficiënt is om je auto ongeveer 2 uur op te laden. Het lijkt er in ieder geval op dat er meerdere verdelingen samen de kansdichtheidsfunctie vormen. Aangezien er ook meerdere types en merken elektrische auto’s zijn, is dit geen rare waarneming.")
+  plotly_chart(figLaad)
+
+with col2:
+  #col2.header("Laadtijd")
+  st.info("Hier zijn de starttijd van de laadsessie en de tijd verbonden aan de laadpaal tegen elkaar geplot. We zien dat er een verdeling is tussen twee verschillende wolken met een lege zone in het midden. Hieruit kan je de laadprofielen uitlezen. Het is te zien dat mensen op vrijwel elk moment van de dag hun auto aan de lader aansluiten, maar de lege zone geeft aan dat mensen de auto vrijwel nooit tussen 00:00 en 05:00 weer van de lader afhalen.")
+  plotly_chart(figTimeSca)
 
 st.header("Regressie")
+
+st.info("Om te kijken hoe goed het totale energiegebruik te voorspellen zijn er twee verschillende regressieplots gemaakt: Tijd verbonden aan een laadpaal tegenover de totaal verbruikte energie en de laadtijd tegenover de totaal verbruikte energie. Bij beide plots zien we dat de regressielijn door het gros van de puntenwolk heen gaat maar dat er toch een groot aantal punten ver boven deze lijn liggen.")
+st.markdown("Om te kijken of de 'ConnectedTime' en de 'ChargeTime' samen de 'TotalEnergy' konden voorspellen is er nog een multivariabele regressie uitgevoerd. Hier is geen visualisatie van omdat dit een meervoudige regressie is. Hier kwam een gecorrigeerde R2-waarde uit van 0.332. Dit betekent dat 33,2% van de data ('ConnectedTime' en 'ChargeTime' samen) het totale energieverbruik kan verklaren. Onderstaande visualisaties tonen twee lineaire regressies.")
 
 def regmodel(Y, X):
     X = sm.add_constant(X) # adding a constant
