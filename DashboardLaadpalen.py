@@ -80,7 +80,12 @@ fig.update_layout(title = "Cumulatief aantal auto's per brandstof categorie",
                      xaxis_title = 'Maand',
                      xaxis = dict(dtick = "M1"))
 fig.show()
-st.plotly_chart(fig)
+
+col1, col2 = st.columns(2)
+with col1:
+  st.plotly_chart(fig)
+with col2:
+  st.markdown("De cumulatieve lijndiagram hiernaast geeft het aantal (aangekochte) voertuigen per maand (in 2020) per brandstofcategorie weer. In de legenda kunnen brandstofcategorieën geselecteerd worden zodat elke lijn ook individueel bekeken kan worden.")
 
 st.header("Laadstations in Nederland")
 st.markdown('''Onderstaande interactieve kaart bestaat uit twee subkaarten. Beide kaarten tonen de laadstations verdeeld over Nederland. Als er wordt ingezoomd zijn alle laadstations individueel te bekijken. Wanneer er op de marker geklikt wordt, worden bepaalde eigenschappen van het laadstation getoond.  
