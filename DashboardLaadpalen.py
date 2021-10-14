@@ -628,8 +628,9 @@ with col2:
 
 st.header("Regressie")
 
-st.info("Om te kijken hoe goed het totale energiegebruik te voorspellen zijn er twee verschillende regressieplots gemaakt: Tijd verbonden aan een laadpaal tegenover de totaal verbruikte energie en de laadtijd tegenover de totaal verbruikte energie. Bij beide plots zien we dat de regressielijn door het gros van de puntenwolk heen gaat maar dat er toch een groot aantal punten ver boven deze lijn liggen.")
-st.markdown("Om te kijken of de 'ConnectedTime' en de 'ChargeTime' samen de 'TotalEnergy' konden voorspellen is er nog een multivariabele regressie uitgevoerd. Hier is geen visualisatie van omdat dit een meervoudige regressie is. Hier kwam een gecorrigeerde R2-waarde uit van 0.332. Dit betekent dat 33,2% van de data ('ConnectedTime' en 'ChargeTime' samen) het totale energieverbruik kan verklaren. Onderstaande visualisaties tonen twee lineaire regressies.")
+st.info('''Om te kijken hoe goed het totale energiegebruik te voorspellen zijn er twee verschillende regressieplots gemaakt: Tijd verbonden aan een laadpaal tegenover de totaal verbruikte energie en de laadtijd tegenover de totaal verbruikte energie. Bij beide plots zien we dat de regressielijn door het gros van de puntenwolk heen gaat maar dat er toch een groot aantal punten ver boven deze lijn liggen.  
+
+Om te kijken of de 'ConnectedTime' en de 'ChargeTime' samen de 'TotalEnergy' konden voorspellen is er nog een multivariabele regressie uitgevoerd. Hier is geen visualisatie van omdat dit een meervoudige regressie is. Hier kwam een gecorrigeerde R2-waarde uit van 0.332. Dit betekent dat 33,2% van de data ('ConnectedTime' en 'ChargeTime' samen) het totale energieverbruik kan verklaren.''')
 
 def regmodel(Y, X):
     X = sm.add_constant(X) # adding a constant
