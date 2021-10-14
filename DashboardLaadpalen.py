@@ -532,7 +532,7 @@ folium.LayerControl(position = 'topleft').add_to(m_dual)
 
 
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(6, 1)
 with col1:
   folium_static(m_dual, width = 1200, height = 700)
 with col2:
