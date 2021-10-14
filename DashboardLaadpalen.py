@@ -83,12 +83,7 @@ fig.show()
 st.plotly_chart(fig)
 
 st.header("Laadstations in Nederland")
-st.markdown('''Onderstaande interactieve kaart bestaat uit twee subkaarten. Beide kaarten tonen de laadstations verdeeld over Nederland. Als er wordt ingezoomd zijn alle laadstations individueel te bekijken. Wanneer er op de marker geklikt wordt, worden bepaalde eigenschappen van het laadstation getoond.  
 
-De legenda geeft – voor beide kaarten – weer welke kleur van een laadstation welk stroomtype vertegenwoordigd. Een lichtgrijze marker betekent dat het laadstation niet in werking is.  
-
-De eerste kaart (links) bevat een filter waarbij gefilterd kan worden op het type aansluiting.  
-De tweede kaart bevat een filter waarbij gefilterd kan worden op provincie.  ''')
 
 # df_ocm_url = "https://api.openchargemap.io/v3/poi/?output=json&countrycode=NL&compact=true&verbose=false&maxresults=100000&key=c2b5b38c-09f3-4304-bbdb-b184319acc70"
 # df_ocm = requests.get(df_ocm_url).json()
@@ -535,7 +530,18 @@ operationtype_leg = add_categorical_legend(m_dual, 'Werking laadstation', colors
 
 folium.LayerControl(position = 'topleft').add_to(m_dual)
 
-folium_static(m_dual, width = 1200, height = 700)
+
+
+col1, col2 = st.columns(2)
+with col1:
+  folium_static(m_dual, width = 1200, height = 700)
+with col2:
+  st.markdown('''Onderstaande interactieve kaart bestaat uit twee subkaarten. Beide kaarten tonen de laadstations verdeeld over Nederland. Als er wordt ingezoomd zijn alle laadstations individueel te bekijken. Wanneer er op de marker geklikt wordt, worden bepaalde eigenschappen van het laadstation getoond.  
+  De legenda geeft – voor beide kaarten – weer welke kleur van een laadstation welk stroomtype vertegenwoordigd. Een lichtgrijze marker betekent dat het laadstation niet in werking is.  
+  
+  De eerste kaart (links) bevat een filter waarbij gefilterd kan worden op het type aansluiting.  
+  De tweede kaart bevat een filter waarbij gefilterd kan worden op provincie.  ''')
+
 st.markdown('**Aantal laadpalen per provincie**')
 st.dataframe(laadpalen_prov.assign(hack='').set_index('hack'), height = 700)
 
